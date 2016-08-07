@@ -1,24 +1,33 @@
 package com.cgz.assignment.domain.model.bug;
 
-import com.cgz.assignment.domain.model.Device.Device;
-import com.cgz.assignment.domain.model.Tester.Tester;
+import com.cgz.assignment.domain.model.device.Device;
+import com.cgz.assignment.domain.model.tester.Tester;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 /**
  * Created by czarek on 07.08.16.
  */
 
+@Entity
 public class Bug {
 
+    @Id
+    @GeneratedValue
     private Long id;
 
+    @ManyToOne
     private Device device;
 
+    @ManyToOne
     private Tester tester;
 
     Bug(Device device, Tester tester) {
         this.device = device;
         this.tester = tester;
-
     }
 
     public Long getId() {

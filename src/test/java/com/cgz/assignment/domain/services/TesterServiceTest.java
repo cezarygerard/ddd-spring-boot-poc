@@ -1,9 +1,9 @@
 package com.cgz.assignment.domain.services;
 
-import com.cgz.assignment.domain.model.Device.Device;
-import com.cgz.assignment.domain.model.Device.DeviceRepository;
-import com.cgz.assignment.domain.model.Tester.Tester;
-import com.cgz.assignment.domain.model.Tester.TesterRepository;
+import com.cgz.assignment.domain.model.device.Device;
+import com.cgz.assignment.domain.model.device.DeviceRepository;
+import com.cgz.assignment.domain.model.tester.Tester;
+import com.cgz.assignment.domain.model.tester.TesterRepository;
 import org.junit.Before;
 import org.junit.Test;
 

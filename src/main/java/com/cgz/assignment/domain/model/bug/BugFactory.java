@@ -1,7 +1,7 @@
 package com.cgz.assignment.domain.model.bug;
 
-import com.cgz.assignment.domain.model.Device.Device;
-import com.cgz.assignment.domain.model.Tester.Tester;
+import com.cgz.assignment.domain.model.device.Device;
+import com.cgz.assignment.domain.model.tester.Tester;
 import org.springframework.stereotype.Component;
 
 /**

@@ -1,6 +1,6 @@
-package com.cgz.assignment.domain.model.Tester;
+package com.cgz.assignment.domain.model.tester;
 
-import com.cgz.assignment.domain.model.Device.Device;
+import com.cgz.assignment.domain.model.device.Device;
 import org.junit.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
