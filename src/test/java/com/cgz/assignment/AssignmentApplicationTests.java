@@ -1,4 +1,4 @@
-package com.cgz;
+package com.cgz.assignment;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
