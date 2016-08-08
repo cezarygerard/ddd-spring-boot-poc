@@ -2,19 +2,49 @@ package com.cgz.assignment.domain.model.tester;
 
 import com.cgz.assignment.domain.model.device.Device;
 
-import javax.persistence.Entity;
+import javax.persistence.*;
 
 /**
  * Created by czarek on 07.08.16.
  */
 @Entity
+@Table(uniqueConstraints = {
+        @UniqueConstraint(columnNames = {"tester_id", "device_id"})
+})
 public class Experience {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private Tester tester;
-
+    @ManyToOne
+    @JoinColumn(name = "device_id")
     private Device device;
 
-    private Long experiencePoints;
+    @Column(nullable = false)
+    private Long experiencePoints = 0L;
+
+
+    private Experience() {
+    }
+
+    public Experience(Device device, Long experiencePoints) {
+        this.device = device;
+        this.experiencePoints = experiencePoints;
+    }
+
+    public Device getDevice() {
+        return device;
+    }
+
+    public Long getExperiencePoints() {
+        return experiencePoints;
+    }
+
+    public void increase() {
+        experiencePoints++;
+    }
+
+
+
 }

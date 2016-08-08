@@ -3,10 +3,7 @@ package com.cgz.assignment.domain.model.bug;
 import com.cgz.assignment.domain.model.device.Device;
 import com.cgz.assignment.domain.model.tester.Tester;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 
 /**
  * Created by czarek on 07.08.16.
@@ -16,7 +13,7 @@ import javax.persistence.ManyToOne;
 public class Bug {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne
@@ -28,6 +25,9 @@ public class Bug {
     Bug(Device device, Tester tester) {
         this.device = device;
         this.tester = tester;
+    }
+
+    private Bug() {
     }
 
     public Long getId() {

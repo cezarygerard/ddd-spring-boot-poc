@@ -1,5 +1,6 @@
 package com.cgz.assignment.domain.services;
 
+import com.cgz.assignment.domain.model.Country;
 import com.cgz.assignment.domain.model.bug.BugCreatedEvent;
 import com.cgz.assignment.domain.model.device.Device;
 import com.cgz.assignment.domain.model.device.DeviceRepository;
@@ -36,7 +37,9 @@ public class TesterService {
         increaseExperience(event.getTesterId(), event.getDeviceId());
     }
 
-    public Iterable<Tester> findTesters(long[] devices, String[] countries) {
-        return testerRepository.findByDeviceAndCountryOrderByExperience(devices, countries);
+    public Iterable<Tester> findTesters(long deviceId, String country) {
+        Device device = deviceRepository.findOne(deviceId);
+        return testerRepository.findByCountryAndExperiencesDeviceOrderByExperiencesExperiencePointsDesc(Country.valueOf(country), device);
+
     }
 }

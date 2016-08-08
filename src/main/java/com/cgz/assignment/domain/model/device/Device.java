@@ -2,6 +2,7 @@ package com.cgz.assignment.domain.model.device;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 /**
@@ -11,7 +12,7 @@ import javax.persistence.Id;
 public class Device {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String description;
