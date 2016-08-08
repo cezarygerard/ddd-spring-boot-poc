@@ -4,10 +4,10 @@ import com.cgz.assignment.domain.model.Country;
 import com.cgz.assignment.domain.model.device.Device;
 
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
+import java.util.HashSet;
 import java.util.Optional;
+import java.util.Set;
 
 /**
  * Created by czarek on 07.08.16.
@@ -30,18 +30,11 @@ public class Tester {
 
     private Date lastLogin;
 
-    @OneToMany(/*mappedBy = "tester", */fetch = FetchType.EAGER)
+    @OneToMany(fetch = FetchType.EAGER)
     @JoinColumn(name = "tester_id")
-    private List<Experience> experiences = new ArrayList<>();
+    private Set<Experience> experiences = new HashSet<>();
 
     Tester() {
-    }
-
-    public Tester(String firstName, String lastName, Country country, Date lastLogin) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.country = country;
-        this.lastLogin = lastLogin;
     }
 
     public long getExperienceInDevice(Device device) {
@@ -55,9 +48,28 @@ public class Tester {
     public void increaseExpInDevice(Device device) {
         Optional<Experience> exp = experiences.stream().filter(experience -> experience.getDevice().equals(device)).findFirst();
         if (exp.isPresent()) {
-            exp.get().increase();
+            exp.get().increaseExperience();
         }
         experiences.add(new Experience(device, 1L));
     }
 
+    public Long getId() {
+        return id;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public Country getCountry() {
+        return country;
+    }
+
+    public Date getLastLogin() {
+        return new Date(lastLogin.getTime());
+    }
 }

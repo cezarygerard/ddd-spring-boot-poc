@@ -1,15 +1,15 @@
-package com.cgz.assignment.domain.model.bug;
+package com.cgz.assignment.domain.model.bug.events;
 
-import com.cgz.assignment.domain.events.DomainEvent;
+import java.io.Serializable;
 
 /**
  * Created by czarek on 07.08.16.
  */
-public class BugCreatedEvent extends DomainEvent {
+public class BugCreatedEvent implements Serializable {
 
-    private long deviceId;
+    private final long deviceId;
 
-    private long testerId;
+    private final long testerId;
 
     public BugCreatedEvent(long deviceId, long testerId) {
         this.deviceId = deviceId;

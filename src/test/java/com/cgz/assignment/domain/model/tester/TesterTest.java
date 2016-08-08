@@ -12,29 +12,29 @@ import static org.mockito.Mockito.mock;
 public class TesterTest {
 
     private Tester tester = new Tester();
-    private Device deviceMock = mock(Device.class);
+    private Device device = mock(Device.class);
 
     @Test
     public void shouldIncreaseIncreaseExperienceForNewDevice() throws Exception {
-        long oldExp = tester.getExperienceInDevice(deviceMock);
+        long oldExp = tester.getExperienceInDevice(device);
         assertThat(oldExp).isEqualTo(0);
 
-        tester.increaseExpInDevice(deviceMock);
+        tester.increaseExpInDevice(device);
 
-        long newExp = tester.getExperienceInDevice(deviceMock);
+        long newExp = tester.getExperienceInDevice(device);
         assertThat(newExp).isEqualTo(1);
     }
 
     @Test
     public void shouldIncreaseIncreaseExperienceForExistingDevice() throws Exception {
-        tester.increaseExpInDevice(deviceMock);
+        tester.increaseExpInDevice(device);
 
-        long oldExp = tester.getExperienceInDevice(deviceMock);
+        long oldExp = tester.getExperienceInDevice(device);
         assertThat(oldExp).isEqualTo(1);
 
-        tester.increaseExpInDevice(deviceMock);
+        tester.increaseExpInDevice(device);
 
-        long newExp = tester.getExperienceInDevice(deviceMock);
+        long newExp = tester.getExperienceInDevice(device);
         assertThat(newExp).isEqualTo(2);
     }
 

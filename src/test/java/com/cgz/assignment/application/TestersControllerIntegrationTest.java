@@ -18,7 +18,7 @@ import java.util.List;
  */
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class ControllerIntegrationTest {
+public class TestersControllerIntegrationTest {
 
     @Autowired
     private BugRepository bugRepository;
@@ -30,10 +30,10 @@ public class ControllerIntegrationTest {
     private DeviceRepository deviceRepository;
 
     @Test
-    public void test() {
+    public void testSimpleFind() {
         List<Tester> testers2 = testerRepository.findByCountryAndExperiencesDeviceOrderByExperiencesExperiencePointsDesc(Country.US, deviceRepository.findOne(8L));
-        //TODO
     }
+    //TODO TEST BUG SUBMITTED VS EXPERIENCE
 
 
 }

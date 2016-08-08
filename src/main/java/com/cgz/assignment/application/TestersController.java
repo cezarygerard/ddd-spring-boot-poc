@@ -1,7 +1,6 @@
 package com.cgz.assignment.application;
 
 import com.cgz.assignment.domain.model.tester.Tester;
-import com.cgz.assignment.domain.services.BugService;
 import com.cgz.assignment.domain.services.TesterService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -10,23 +9,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-public class Controller {
-
-    private BugService bugService;
+public class TestersController {
 
     private TesterService testerService;
 
-
     @Autowired
-    public Controller(BugService bugService, TesterService testerService) {
-        this.bugService = bugService;
+    public TestersController(TesterService testerService) {
         this.testerService = testerService;
-    }
-
-    //TODO move to separate controller
-    @RequestMapping(value = "/bug", method = RequestMethod.POST)
-    public void submitBug(@RequestParam long deviceId, @RequestParam long testerId) {
-        bugService.submitBug(deviceId, testerId);
     }
 
     @RequestMapping(value = "/tester", method = RequestMethod.GET)

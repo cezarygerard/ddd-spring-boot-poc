@@ -30,14 +30,6 @@ public class Bug {
     private Bug() {
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    void setId(Long id) {
-        this.id = id;
-    }
-
     public Device getDevice() {
         return device;
     }

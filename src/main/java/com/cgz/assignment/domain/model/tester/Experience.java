@@ -24,7 +24,6 @@ public class Experience {
     @Column(nullable = false)
     private Long experiencePoints = 0L;
 
-
     private Experience() {
     }
 
@@ -33,15 +32,15 @@ public class Experience {
         this.experiencePoints = experiencePoints;
     }
 
-    public Device getDevice() {
+    Device getDevice() {
         return device;
     }
 
-    public Long getExperiencePoints() {
+    Long getExperiencePoints() {
         return experiencePoints;
     }
 
-    public void increase() {
+    void increaseExperience() {
         experiencePoints++;
     }
 
