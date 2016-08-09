@@ -2,6 +2,7 @@ package com.cgz.assignment.application;
 
 import com.cgz.assignment.domain.model.bug.BugRepository;
 import com.cgz.assignment.domain.model.device.DeviceRepository;
+import com.cgz.assignment.domain.model.tester.Tester;
 import com.cgz.assignment.domain.model.tester.TesterRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -38,8 +39,9 @@ public class TestersControllerIntegrationTest {
 
         List<Long> inputAsList = Arrays.asList(devices);
 
-        testerRepository.findByDeviceAndCountryOrderByExperience(inputAsList, countries);
+        List<Tester> res = testerRepository.findByDeviceAndCountryOrderByExperience(inputAsList, countries);
 
+        System.out.println(Arrays.toString(res.toArray()));
 
     }
 

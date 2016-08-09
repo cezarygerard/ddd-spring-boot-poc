@@ -8,6 +8,9 @@ import com.cgz.assignment.domain.model.tester.Tester;
 import com.cgz.assignment.domain.model.tester.TesterRepository;
 import org.junit.Test;
 
+import java.util.Arrays;
+import java.util.List;
+
 import static org.mockito.Mockito.*;
 
 /**
@@ -33,8 +36,31 @@ public class TesterServiceTest {
     }
 
     @Test
-    public void shouldFindTestersViaRepository() {
-        //TODO x4 metody
+    public void shouldFindTestersByCountry() {
+        List<String> countries = Arrays.asList("US", "JP");
+        testerService.findTesters(null, countries);
+        verify(testerRepository, times(1)).findByCountryOrderByExperience(countries);
+    }
+
+    @Test
+    public void shouldFindTestersByDevice() {
+        List<Long> devices = Arrays.asList(5L, 55L);
+        testerService.findTesters(devices, null);
+        verify(testerRepository, times(1)).findByDeviceOrderByExperience(devices);
+    }
+
+//    @Test
+//    public void shouldFindTestersByDeviceAndCountry() {
+//        List<String> countries = Arrays.asList("US", "JP");
+//        List<Long> devices = Arrays.asList(5L, 55L);
+//        testerService.findTesters(devices,countries);
+//        verify(testerRepository, times(1)).findByDeviceAndCountryOrderByExperience(devices,countries);
+//    }
+
+    @Test
+    public void shouldFindAllTesters() {
+        testerService.findTesters(null, null);
+        verify(testerRepository, times(1)).findAllOrderByExperience();
     }
 
 

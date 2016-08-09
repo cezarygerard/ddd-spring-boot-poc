@@ -13,7 +13,7 @@ import java.util.List;
 public interface TesterRepository extends PagingAndSortingRepository<Tester, Long> {
 
     @Query(nativeQuery = true, value =
-            "select * from tester where id in (\n" +
+            "select * from tester t where id in (\n" +
                     "  SELECT tester_id\n" +
                     "  FROM (\n" +
                     "         SELECT\n" +
@@ -31,7 +31,7 @@ public interface TesterRepository extends PagingAndSortingRepository<Tester, Lon
     List<Tester> findByDeviceAndCountryOrderByExperience(List<Long> deviceIds, List<String> countries);
 
     @Query(nativeQuery = true, value =
-            "select * from tester where id in (\n" +
+            "select * from tester t where id in (\n" +
                     "  SELECT tester_id\n" +
                     "  FROM (\n" +
                     "         SELECT\n" +
@@ -49,7 +49,7 @@ public interface TesterRepository extends PagingAndSortingRepository<Tester, Lon
     List<Tester> findByDeviceOrderByExperience(List<Long> deviceIds);
 
     @Query(nativeQuery = true, value =
-            "select * from tester where id in (\n" +
+            "select * from tester t where id in (\n" +
                     "  SELECT tester_id\n" +
                     "  FROM (\n" +
                     "         SELECT\n" +
@@ -68,7 +68,7 @@ public interface TesterRepository extends PagingAndSortingRepository<Tester, Lon
 
 
     @Query(nativeQuery = true, value =
-            "select * from tester where id in (\n" +
+            "select * from tester t where id in (\n" +
                     "  SELECT tester_id\n" +
                     "  FROM (\n" +
                     "         SELECT\n" +

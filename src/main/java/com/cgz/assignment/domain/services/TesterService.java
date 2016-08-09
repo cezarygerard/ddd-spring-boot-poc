@@ -10,6 +10,7 @@ import com.cgz.assignment.domain.model.tester.TesterRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -45,14 +46,13 @@ public class TesterService {
     }
 
     public Iterable<TesterDto> findTesters(List<Long> deviceIds, List<String> countryCodes) {
-        //TODO VALIDATE INPUT
         List<Tester> testers = findTestersInRepo(deviceIds, countryCodes);
         return testers.stream().map(dtoFactory::getDto).collect(Collectors.toList());
     }
 
     private List<Tester> findTestersInRepo(List<Long> deviceIds, List<String> countryCodes) {
-        boolean devicesEmpty = deviceIds.isEmpty();
-        boolean countriesEmpty = countryCodes.isEmpty();
+        boolean devicesEmpty = CollectionUtils.isEmpty(deviceIds);
+        boolean countriesEmpty = CollectionUtils.isEmpty(countryCodes);
         boolean devicesPresent = !devicesEmpty;
         boolean countriesPresent = !countriesEmpty;
 

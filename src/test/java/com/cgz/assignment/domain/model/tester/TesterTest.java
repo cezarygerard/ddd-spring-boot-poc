@@ -38,6 +38,4 @@ public class TesterTest {
         assertThat(newExp).isEqualTo(2);
     }
 
-
-//    TODO TEST DOMAIN ENTITIY METHODS
 }
