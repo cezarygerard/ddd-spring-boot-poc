@@ -19,7 +19,7 @@ public class TesterTest {
         long oldExp = tester.getExperienceInDevice(device);
         assertThat(oldExp).isEqualTo(0);
 
-        tester.increaseExpInDevice(device);
+        tester.increaseExperienceInDevice(device);
 
         long newExp = tester.getExperienceInDevice(device);
         assertThat(newExp).isEqualTo(1);
@@ -27,15 +27,17 @@ public class TesterTest {
 
     @Test
     public void shouldIncreaseIncreaseExperienceForExistingDevice() throws Exception {
-        tester.increaseExpInDevice(device);
+        tester.increaseExperienceInDevice(device);
 
         long oldExp = tester.getExperienceInDevice(device);
         assertThat(oldExp).isEqualTo(1);
 
-        tester.increaseExpInDevice(device);
+        tester.increaseExperienceInDevice(device);
 
         long newExp = tester.getExperienceInDevice(device);
         assertThat(newExp).isEqualTo(2);
     }
 
+
+//    TODO TEST DOMAIN ENTITIY METHODS
 }

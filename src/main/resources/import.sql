@@ -1,4 +1,4 @@
-inserINSERT into public.tester (id, first_name, last_name, country, last_login) VALUES ('1','Miguel','Bautista','US','2013-08-04 23:57:38');
+INSERT into public.tester (id, first_name, last_name, country, last_login) VALUES ('1','Miguel','Bautista','US','2013-08-04 23:57:38');
 INSERT into public.tester (id, first_name, last_name, country, last_login) VALUES ('2','Michael','Lubavin','US','2013-07-12 13:27:18');
 INSERT into public.tester (id, first_name, last_name, country, last_login) VALUES ('3','Leonard','Sutton','GB','2013-07-16 21:17:28');
 INSERT into public.tester (id, first_name, last_name, country, last_login) VALUES ('4','Taybin','Rutkin','US','2013-01-01 10:57:38');
@@ -1027,7 +1027,7 @@ INSERT into public.bug (id, device_id, tester_id) values ('1000','9','8');
 
 INSERT INTO public.experience (tester_id, device_id, experience_points) select tester_id, device_id, count(device_id) from bug GROUP BY device_id, tester_id ;
 
-
+--This inserts may fail due to unique constraint on tester_id, device_id, but import will not leave unexperienced user without device
 INSERT into public.experience (tester_id, device_id, experience_points) values ('1','1', '0' );
 INSERT into public.experience (tester_id, device_id, experience_points) values ('1','2', '0' );
 INSERT into public.experience (tester_id, device_id, experience_points) values ('1','3', '0' );

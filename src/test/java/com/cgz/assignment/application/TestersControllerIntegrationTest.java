@@ -1,9 +1,7 @@
 package com.cgz.assignment.application;
 
-import com.cgz.assignment.domain.model.Country;
 import com.cgz.assignment.domain.model.bug.BugRepository;
 import com.cgz.assignment.domain.model.device.DeviceRepository;
-import com.cgz.assignment.domain.model.tester.Tester;
 import com.cgz.assignment.domain.model.tester.TesterRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -11,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -31,9 +30,19 @@ public class TestersControllerIntegrationTest {
 
     @Test
     public void testSimpleFind() {
-        List<Tester> testers2 = testerRepository.findByCountryAndExperiencesDeviceOrderByExperiencesExperiencePointsDesc(Country.US, deviceRepository.findOne(8L));
-    }
-    //TODO TEST BUG SUBMITTED VS EXPERIENCE
+//        String[] countries = {"US",};
+        Long[] devices = {1L, 2L, 3L, 6L};
+//        List<Tester> testers = testerRepository.findByDeviceAndCountryOrderByExperience(devices, countries);
 
+        List<String> countries = Arrays.asList("US", "JP");
+
+        List<Long> inputAsList = Arrays.asList(devices);
+
+        testerRepository.findByDeviceAndCountryOrderByExperience(inputAsList, countries);
+
+
+    }
+
+//    TODO INTEGRATION TESTS
 
 }

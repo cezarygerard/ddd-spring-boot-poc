@@ -9,7 +9,7 @@ import javax.persistence.*;
  */
 @Entity
 @Table(uniqueConstraints = {
-        @UniqueConstraint(columnNames = {"tester_id", "device_id"})
+        @UniqueConstraint(columnNames = {"device_id", "tester_id"})
 })
 public class Experience {
 
@@ -17,7 +17,7 @@ public class Experience {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "device_id")
     private Device device;
 

@@ -29,10 +29,9 @@ public class BugEventPublisherTest {
         when(bug.getTester()).thenReturn(mock(Tester.class));
     }
 
-
     @Test
     public void shouldPublishEventViaApplicationEventPublisher() {
-        bugEventPublisher.publishBugCreatedEvemt(bug);
+        bugEventPublisher.publishBugCreatedEvent(bug);
         verify(applicationEventPublisher, times(1)).publishEvent(any(BugCreatedEvent.class));
     }
 
@@ -42,7 +41,7 @@ public class BugEventPublisherTest {
         when(bug.getDevice().getId()).thenReturn(DEVICE_ID);
         when(bug.getTester().getId()).thenReturn(TESTER_ID);
 
-        bugEventPublisher.publishBugCreatedEvemt(bug);
+        bugEventPublisher.publishBugCreatedEvent(bug);
 
         ArgumentCaptor<BugCreatedEvent> argument = ArgumentCaptor.forClass(BugCreatedEvent.class);
         verify(applicationEventPublisher, times(1)).publishEvent(argument.capture());

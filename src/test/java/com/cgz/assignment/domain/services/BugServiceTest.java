@@ -55,7 +55,7 @@ public class BugServiceTest {
     @Test
     public void shouldPublishEvent() {
         bugService.submitBug(DEVICE_ID, TESTER_ID);
-        verify(bugEventPublisher, times(1)).publishBugCreatedEvemt(bug);
+        verify(bugEventPublisher, times(1)).publishBugCreatedEvent(bug);
     }
 
 

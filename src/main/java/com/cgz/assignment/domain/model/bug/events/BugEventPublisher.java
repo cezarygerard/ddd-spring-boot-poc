@@ -18,7 +18,7 @@ public class BugEventPublisher {
         this.applicationEventPublisher = eventPublisher;
     }
 
-    public void publishBugCreatedEvemt(Bug bug) {
+    public void publishBugCreatedEvent(Bug bug) {
         Long deviceId = bug.getDevice().getId();
         Long testerId = bug.getTester().getId();
         applicationEventPublisher.publishEvent(new BugCreatedEvent(deviceId, testerId));

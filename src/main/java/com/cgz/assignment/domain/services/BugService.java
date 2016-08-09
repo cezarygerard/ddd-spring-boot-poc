@@ -33,11 +33,13 @@ public class BugService {
     }
 
     public void submitBug(Long deviceId, Long testerId) {
+        //TODO VALIDATE INPUT
         Tester tester = testerRepository.findOne(testerId);
         Device device = deviceRepository.findOne(deviceId);
+        //TODO VALIDATE
         Bug bug = bugFactory.create(device, tester);
         bugRepository.save(bug);
-        bugEventPublisher.publishBugCreatedEvemt(bug);
+        bugEventPublisher.publishBugCreatedEvent(bug);
     }
 
 }
