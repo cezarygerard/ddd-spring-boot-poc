@@ -44,6 +44,7 @@ public class Tester {
             return exp.get().getExperiencePoints();
         }
         return 0;
+
     }
 
     public void increaseExperienceInDevice(Device device) {
