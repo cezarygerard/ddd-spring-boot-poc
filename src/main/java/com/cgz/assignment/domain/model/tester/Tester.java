@@ -14,7 +14,7 @@ import java.util.Set;
  * Created by czarek on 07.08.16.
  */
 
-//TODO make this class pure domain entity, move persistence concerns to infrastructure leyer
+//TODO make this class pure domain entity, move persistence concerns to infrastructure layer
 
 @Entity
 @Table(indexes = {@Index(name = "tester_country", columnList = "country")})
