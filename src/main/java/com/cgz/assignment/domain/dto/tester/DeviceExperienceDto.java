@@ -5,19 +5,25 @@ import java.io.Serializable;
 /**
  * Created by czarek on 08.08.16.
  */
-public class DeviceDto implements Serializable {
+public class DeviceExperienceDto implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    private Long deviceId;
+    private long deviceId;
 
     private String deviceDescription;
 
-    public Long getDeviceId() {
+    private long experiencePoints;
+
+    public static long getSerialVersionUID() {
+        return serialVersionUID;
+    }
+
+    public long getDeviceId() {
         return deviceId;
     }
 
-    public void setDeviceId(Long deviceId) {
+    public void setDeviceId(long deviceId) {
         this.deviceId = deviceId;
     }
 
@@ -29,5 +35,11 @@ public class DeviceDto implements Serializable {
         this.deviceDescription = deviceDescription;
     }
 
+    public long getExperiencePoints() {
+        return experiencePoints;
+    }
 
+    public void setExperiencePoints(long experiencePoints) {
+        this.experiencePoints = experiencePoints;
+    }
 }

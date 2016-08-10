@@ -1,4 +1,4 @@
-package com.cgz.assignment.domain.services;
+package com.cgz.assignment.domain.services.bug;
 
 import com.cgz.assignment.domain.model.bug.Bug;
 import com.cgz.assignment.domain.model.bug.BugFactory;
@@ -7,8 +7,6 @@ import com.cgz.assignment.domain.model.device.Device;
 import com.cgz.assignment.domain.model.device.DeviceRepository;
 import com.cgz.assignment.domain.model.tester.Tester;
 import com.cgz.assignment.domain.model.tester.TesterRepository;
-import com.cgz.assignment.domain.services.bug.BugEventPublisher;
-import com.cgz.assignment.domain.services.bug.BugService;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -36,15 +34,17 @@ public class BugServiceTest {
 
     @Before
     public void setUp() {
-        when(bugFactory.create(device, tester)).thenReturn(bug);
+        when(bugFactory.createBug(device, tester)).thenReturn(bug);
         when(deviceRepository.findOne(anyLong())).thenReturn(device);
         when(testerRepository.findOne(anyLong())).thenReturn(tester);
+        when(bug.getDevice()).thenReturn(device);
+        when(bug.getTester()).thenReturn(tester);
     }
 
     @Test
     public void shouldCreateNewBug() {
         bugService.submitBug(DEVICE_ID, TESTER_ID);
-        verify(bugFactory, times(1)).create(device, tester);
+        verify(bugFactory, times(1)).createBug(device, tester);
     }
 
     @Test
@@ -58,8 +58,5 @@ public class BugServiceTest {
         bugService.submitBug(DEVICE_ID, TESTER_ID);
         verify(bugEventPublisher, times(1)).publishBugCreatedEvent(bug);
     }
-
-    //todo test exceptions
-
 
 }

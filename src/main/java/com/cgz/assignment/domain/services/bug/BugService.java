@@ -1,5 +1,6 @@
 package com.cgz.assignment.domain.services.bug;
 
+import com.cgz.assignment.domain.dto.bug.BugDto;
 import com.cgz.assignment.domain.exception.EntityNotFoundDomainException;
 import com.cgz.assignment.domain.model.bug.Bug;
 import com.cgz.assignment.domain.model.bug.BugFactory;
@@ -10,7 +11,6 @@ import com.cgz.assignment.domain.model.tester.Tester;
 import com.cgz.assignment.domain.model.tester.TesterRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -20,7 +20,7 @@ import java.util.Optional;
  * Created by czarek on 07.08.16.
  */
 @Service
-@Transactional(propagation = Propagation.REQUIRED, isolation = Isolation.READ_COMMITTED)
+@Transactional(propagation = Propagation.REQUIRED)
 public class BugService {
 
     private final BugEventPublisher bugEventPublisher;
@@ -38,7 +38,7 @@ public class BugService {
         this.bugEventPublisher = eventPublisher;
     }
 
-    public void submitBug(long deviceId, long testerId) {
+    public BugDto submitBug(long deviceId, long testerId) {
         Tester tester = Optional.ofNullable(testerRepository.findOne(testerId))
                 .orElseThrow(() ->
                         new EntityNotFoundDomainException("BugService submitBug didn't find tester: " + testerId)
@@ -46,12 +46,13 @@ public class BugService {
 
         Device device = Optional.ofNullable(deviceRepository.findOne(deviceId))
                 .orElseThrow(() ->
-                        new EntityNotFoundDomainException("BugService submitBug didn't find device" + deviceId)
+                        new EntityNotFoundDomainException("BugService submitBug didn't find device: " + deviceId)
                 );
 
-        Bug bug = bugFactory.create(device, tester);
+        Bug bug = bugFactory.createBug(device, tester);
         bugRepository.save(bug);
         bugEventPublisher.publishBugCreatedEvent(bug);
+        return new BugDto(bug.getDevice().getId(), bug.getTester().getId());
     }
 
 }

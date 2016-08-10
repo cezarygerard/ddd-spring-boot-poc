@@ -1,6 +1,6 @@
 package com.cgz.assignment.domain.dto.tester;
 
-import com.cgz.assignment.domain.model.device.Device;
+import com.cgz.assignment.domain.model.tester.Experience;
 import com.cgz.assignment.domain.model.tester.Tester;
 import org.springframework.stereotype.Component;
 
@@ -19,18 +19,19 @@ public class TesterDtoFactory {
         dto.setLastName(tester.getLastName());
         dto.setCountry(tester.getCountry().name());
         dto.setTesterId(tester.getId());
-        dto.setDevices(mapDevices(tester.getAllDevices()));
+        dto.setDevices(mapExperiences(tester.getExperiences()));
         return dto;
     }
 
-    private Set<DeviceDto> mapDevices(Set<Device> allDevices) {
-        return allDevices.stream().map(this::mapSingleDevice).collect(Collectors.toSet());
+    private Set<DeviceExperienceDto> mapExperiences(Set<Experience> allDevices) {
+        return allDevices.stream().map(this::mapSingleDeviceExperience).collect(Collectors.toSet());
     }
 
-    private DeviceDto mapSingleDevice(Device device) {
-        DeviceDto dto = new DeviceDto();
-        dto.setDeviceDescription(device.getDescription());
-        dto.setDeviceId(device.getId());
+    private DeviceExperienceDto mapSingleDeviceExperience(Experience experience) {
+        DeviceExperienceDto dto = new DeviceExperienceDto();
+        dto.setDeviceDescription(experience.getDevice().getDescription());
+        dto.setDeviceId(experience.getDevice().getId());
+        dto.setExperiencePoints(experience.getExperiencePoints());
         return dto;
     }
 

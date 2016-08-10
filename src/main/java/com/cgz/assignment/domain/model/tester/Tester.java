@@ -9,7 +9,6 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 /**
  * Created by czarek on 07.08.16.
@@ -64,10 +63,6 @@ public class Tester {
         experience.increaseExperience();
     }
 
-    public Set<Device> getAllDevices() {
-        return experiences.stream().map(Experience::getDevice).collect(Collectors.toSet());
-    }
-
     public Long getId() {
         return id;
     }
@@ -88,7 +83,7 @@ public class Tester {
         return new Date(lastLogin.getTime());
     }
 
-    Set<Experience> getExperiences() {
+    public Set<Experience> getExperiences() {
         return experiences;
     }
 }

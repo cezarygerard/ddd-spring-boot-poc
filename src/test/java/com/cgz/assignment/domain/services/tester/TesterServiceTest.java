@@ -1,4 +1,4 @@
-package com.cgz.assignment.domain.services;
+package com.cgz.assignment.domain.services.tester;
 
 import com.cgz.assignment.domain.dto.tester.TesterDtoFactory;
 import com.cgz.assignment.domain.event.bug.BugCreatedEvent;
@@ -7,7 +7,6 @@ import com.cgz.assignment.domain.model.device.Device;
 import com.cgz.assignment.domain.model.device.DeviceRepository;
 import com.cgz.assignment.domain.model.tester.Tester;
 import com.cgz.assignment.domain.model.tester.TesterRepository;
-import com.cgz.assignment.domain.services.tester.TesterService;
 import org.junit.Test;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.data.domain.Pageable;
@@ -40,7 +39,11 @@ public class TesterServiceTest {
         Device device = mock(Device.class);
         when(testerRepository.findOne(TESTER_ID)).thenReturn(tester);
         when(deviceRepository.findOne(DEVICE_ID)).thenReturn(device);
-        testerService.handleBugCreatedEvent(new BugCreatedEvent(TESTER_ID, DEVICE_ID));
+
+        testerService.handleBugCreatedEvent(new BugCreatedEvent(DEVICE_ID, TESTER_ID));
+
+        verify(deviceRepository, times(1)).findOne(DEVICE_ID);
+        verify(testerRepository, times(1)).findOne(TESTER_ID);
         verify(tester, times(1)).increaseExperienceInDevice(device);
     }
 
@@ -49,7 +52,7 @@ public class TesterServiceTest {
         List<String> countryCodes = Arrays.asList("US", "JP");
         List<Country> countryEnums = Arrays.asList(Country.US, Country.JP);
         testerService.findTesters(null, countryCodes, pageable);
-        verify(testerRepository, times(1)).findByCountryOrderByExperience(eq(countryEnums), pageable);
+        verify(testerRepository, times(1)).findByCountryOrderByExperience(eq(countryEnums), eq(pageable));
     }
 
     @Test
@@ -65,7 +68,7 @@ public class TesterServiceTest {
         List<Country> countryEnums = Arrays.asList(Country.US, Country.JP);
         List<Long> devices = Arrays.asList(5L, 55L);
         testerService.findTesters(devices, countryCodes, pageable);
-        verify(testerRepository, times(1)).findByDeviceAndCountryOrderByExperience(devices, eq(countryEnums), pageable);
+        verify(testerRepository, times(1)).findByDeviceAndCountryOrderByExperience(eq(devices), eq(countryEnums), eq(pageable));
     }
 
     @Test

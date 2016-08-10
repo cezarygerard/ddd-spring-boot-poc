@@ -24,19 +24,22 @@ public class Experience {
     @Column(nullable = false)
     private long experiencePoints = 0L;
 
+    @Version
+    private int version;
+
     private Experience() {
     }
 
-    public Experience(Device device, Long experiencePoints) {
+    public Experience(Device device, long experiencePoints) {
         this.device = device;
         this.experiencePoints = experiencePoints;
     }
 
-    Device getDevice() {
+    public Device getDevice() {
         return device;
     }
 
-    long getExperiencePoints() {
+    public long getExperiencePoints() {
         return experiencePoints;
     }
 

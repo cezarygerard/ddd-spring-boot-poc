@@ -1025,42 +1025,5 @@ INSERT into public.bug (id, device_id, tester_id) values (nextval('public.bug_id
 
 
 
-INSERT INTO public.experience (tester_id, device_id, experience_points) select tester_id, device_id, count(device_id) from bug GROUP BY device_id, tester_id ;
+INSERT INTO public.experience (tester_id, device_id, experience_points, version) select tester_id, device_id, count(device_id), 0 from bug GROUP BY device_id, tester_id ;
 
---This inserts may fail due to unique constraint on tester_id, device_id, but import will not leave unexperienced user without device
-INSERT into public.experience (tester_id, device_id, experience_points) values ('1','1', '0' );
-INSERT into public.experience (tester_id, device_id, experience_points) values ('1','2', '0' );
-INSERT into public.experience (tester_id, device_id, experience_points) values ('1','3', '0' );
-INSERT into public.experience (tester_id, device_id, experience_points) values ('1','10', '0' );
-INSERT into public.experience (tester_id, device_id, experience_points) values ('2','4', '0' );
-INSERT into public.experience (tester_id, device_id, experience_points) values ('2','5', '0' );
-INSERT into public.experience (tester_id, device_id, experience_points) values ('2','6', '0' );
-INSERT into public.experience (tester_id, device_id, experience_points) values ('2','7', '0' );
-INSERT into public.experience (tester_id, device_id, experience_points) values ('2','8', '0' );
-INSERT into public.experience (tester_id, device_id, experience_points) values ('2','9', '0' );
-INSERT into public.experience (tester_id, device_id, experience_points) values ('3','3', '0' );
-INSERT into public.experience (tester_id, device_id, experience_points) values ('3','4', '0' );
-INSERT into public.experience (tester_id, device_id, experience_points) values ('3','5', '0' );
-INSERT into public.experience (tester_id, device_id, experience_points) values ('3','6', '0' );
-INSERT into public.experience (tester_id, device_id, experience_points) values ('4','1', '0' );
-INSERT into public.experience (tester_id, device_id, experience_points) values ('4','2', '0' );
-INSERT into public.experience (tester_id, device_id, experience_points) values ('5','5', '0' );
-INSERT into public.experience (tester_id, device_id, experience_points) values ('5','6', '0' );
-INSERT into public.experience (tester_id, device_id, experience_points) values ('5','7', '0' );
-INSERT into public.experience (tester_id, device_id, experience_points) values ('5','1', '0' );
-INSERT into public.experience (tester_id, device_id, experience_points) values ('5','10', '0' );
-INSERT into public.experience (tester_id, device_id, experience_points) values ('6','3', '0' );
-INSERT into public.experience (tester_id, device_id, experience_points) values ('7','4', '0' );
-INSERT into public.experience (tester_id, device_id, experience_points) values ('7','5', '0' );
-INSERT into public.experience (tester_id, device_id, experience_points) values ('7','6', '0' );
-INSERT into public.experience (tester_id, device_id, experience_points) values ('7','7', '0' );
-INSERT into public.experience (tester_id, device_id, experience_points) values ('7','8', '0' );
-INSERT into public.experience (tester_id, device_id, experience_points) values ('8','1', '0' );
-INSERT into public.experience (tester_id, device_id, experience_points) values ('8','3', '0' );
-INSERT into public.experience (tester_id, device_id, experience_points) values ('8','6', '0' );
-INSERT into public.experience (tester_id, device_id, experience_points) values ('8','9', '0' );
-INSERT into public.experience (tester_id, device_id, experience_points) values ('8','10', '0' );
-INSERT into public.experience (tester_id, device_id, experience_points) values ('9','5', '0' );
-INSERT into public.experience (tester_id, device_id, experience_points) values ('9','6', '0' );
-INSERT into public.experience (tester_id, device_id, experience_points) values ('9','8', '0' );
-INSERT into public.experience (tester_id, device_id, experience_points) values ('9','9', '0' );

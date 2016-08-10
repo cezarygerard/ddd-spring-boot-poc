@@ -9,20 +9,20 @@ public class BugCreatedEvent implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    private final long deviceId;
+    private final Long deviceId;
 
-    private final long testerId;
+    private final Long testerId;
 
-    public BugCreatedEvent(long deviceId, long testerId) {
+    public BugCreatedEvent(Long deviceId, Long testerId) {
         this.deviceId = deviceId;
         this.testerId = testerId;
     }
 
-    public long getDeviceId() {
+    public Long getDeviceId() {
         return deviceId;
     }
 
-    public long getTesterId() {
+    public Long getTesterId() {
         return testerId;
     }
 }

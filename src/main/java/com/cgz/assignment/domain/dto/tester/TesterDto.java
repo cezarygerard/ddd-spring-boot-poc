@@ -10,7 +10,7 @@ public class TesterDto implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    private Long testerId;
+    private long testerId;
 
     private String firstName;
 
@@ -18,13 +18,13 @@ public class TesterDto implements Serializable {
 
     private String country;
 
-    private Set<DeviceDto> devices;
+    private Set<DeviceExperienceDto> devices;
 
-    public Long getTesterId() {
+    public long getTesterId() {
         return testerId;
     }
 
-    public void setTesterId(Long testerId) {
+    public void setTesterId(long testerId) {
         this.testerId = testerId;
     }
 
@@ -52,11 +52,11 @@ public class TesterDto implements Serializable {
         this.country = country;
     }
 
-    public Set<DeviceDto> getDevices() {
+    public Set<DeviceExperienceDto> getDevices() {
         return devices;
     }
 
-    public void setDevices(Set<DeviceDto> devices) {
+    public void setDevices(Set<DeviceExperienceDto> devices) {
         this.devices = devices;
     }
 

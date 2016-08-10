@@ -7,7 +7,7 @@ import org.junit.Test;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
 
-/**e
+/**
  * Created by czarek on 07.08.16.
  */
 public class TesterTest {
@@ -34,7 +34,6 @@ public class TesterTest {
     public void shouldThrowExceptionIfNoDevice() throws Exception {
         long oldExp = tester.getExperienceInDevice(device);
         assertThat(oldExp).isEqualTo(0);
-
         tester.increaseExperienceInDevice(device);
     }
 

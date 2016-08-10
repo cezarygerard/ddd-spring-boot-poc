@@ -15,7 +15,6 @@ import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.context.event.EventListener;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
@@ -29,7 +28,7 @@ import java.util.stream.Collectors;
  * Created by czarek on 07.08.16.
  */
 @Service
-@Transactional(propagation = Propagation.REQUIRED, isolation = Isolation.READ_COMMITTED)
+@Transactional(propagation = Propagation.REQUIRED)
 public class TesterService {
 
     private final ApplicationEventPublisher applicationEventPublisher;
@@ -48,7 +47,16 @@ public class TesterService {
     @EventListener
     @Transactional(propagation = Propagation.REQUIRES_NEW)
     public void handleBugCreatedEvent(BugCreatedEvent event) {
-        increaseExperience(event.getTesterId(), event.getDeviceId());
+        Tester tester = Optional.ofNullable(testerRepository.findOne(event.getTesterId()))
+                .orElseThrow(() ->
+                        new EntityNotFoundDomainException("TesterService increaseExperience didn't find tester")
+                );
+
+        Device device = Optional.ofNullable(deviceRepository.findOne(event.getDeviceId()))
+                .orElseThrow(() ->
+                        new EntityNotFoundDomainException("TesterService increaseExperience didn't find device")
+                );
+        increaseExperience(device, tester);
     }
 
     public Iterable<TesterDto> findTesters(List<Long> deviceIds, List<String> countryCodes, Pageable pageable) {
@@ -57,20 +65,10 @@ public class TesterService {
         return testers.stream().map(dtoFactory::getDto).collect(Collectors.toList());
     }
 
-    private void increaseExperience(long deviceId, long testerId) {
-        Tester tester = Optional.ofNullable(testerRepository.findOne(testerId))
-                .orElseThrow(() ->
-                        new EntityNotFoundDomainException("TesterService increaseExperience didn't find tester")
-                );
-
-        Device device = Optional.ofNullable(deviceRepository.findOne(deviceId))
-                .orElseThrow(() ->
-                        new EntityNotFoundDomainException("TesterService increaseExperience didn't find device")
-                );
-
+    private void increaseExperience(Device device, Tester tester) {
         tester.increaseExperienceInDevice(device);
         //TODO move event publishing to Tester once it is pure domain entity
-        applicationEventPublisher.publishEvent(new TesterExperienceIncreasedEvent(testerId));
+        applicationEventPublisher.publishEvent(new TesterExperienceIncreasedEvent(tester.getId()));
     }
 
 

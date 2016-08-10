@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class BugFactory {
 
-    public Bug create(Device device, Tester tester) {
+    public Bug createBug(Device device, Tester tester) {
         return new Bug(device, tester);
     }
 }
