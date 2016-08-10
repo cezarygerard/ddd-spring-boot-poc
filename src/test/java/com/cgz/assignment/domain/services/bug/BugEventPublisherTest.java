@@ -27,6 +27,8 @@ public class BugEventPublisherTest {
     public void setUp() {
         when(bug.getDevice()).thenReturn(mock(Device.class));
         when(bug.getTester()).thenReturn(mock(Tester.class));
+        when(bug.getDevice().getId()).thenReturn(DEVICE_ID);
+        when(bug.getTester().getId()).thenReturn(TESTER_ID);
     }
 
     @Test
