@@ -10,7 +10,6 @@ import org.mockito.ArgumentCaptor;
 import org.springframework.context.ApplicationEventPublisher;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.*;
 
 /**
@@ -33,7 +32,7 @@ public class BugEventPublisherTest {
     @Test
     public void shouldPublishEventViaApplicationEventPublisher() {
         bugEventPublisher.publishBugCreatedEvent(bug);
-        verify(applicationEventPublisher, times(1)).publishEvent(any(BugCreatedEvent.class));
+        verify(applicationEventPublisher, times(1)).publishEvent(refEq(new BugCreatedEvent(DEVICE_ID, TESTER_ID)));
     }
 
 

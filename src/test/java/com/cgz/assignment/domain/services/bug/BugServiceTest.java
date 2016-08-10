@@ -1,5 +1,6 @@
 package com.cgz.assignment.domain.services.bug;
 
+import com.cgz.assignment.domain.exception.EntityNotFoundDomainException;
 import com.cgz.assignment.domain.model.bug.Bug;
 import com.cgz.assignment.domain.model.bug.BugFactory;
 import com.cgz.assignment.domain.model.bug.BugRepository;
@@ -58,5 +59,19 @@ public class BugServiceTest {
         bugService.submitBug(DEVICE_ID, TESTER_ID);
         verify(bugEventPublisher, times(1)).publishBugCreatedEvent(bug);
     }
+
+    @Test(expected = EntityNotFoundDomainException.class)
+    public void shouldThrowExceptionOnInvalidTesterId() {
+        when(testerRepository.findOne(anyLong())).thenReturn(null);
+        bugService.submitBug(DEVICE_ID, TESTER_ID);
+    }
+
+
+    @Test(expected = EntityNotFoundDomainException.class)
+    public void shouldThrowExceptionOnInvalidDeviceId() {
+        when(deviceRepository.findOne(anyLong())).thenReturn(null);
+        bugService.submitBug(DEVICE_ID, TESTER_ID);
+    }
+
 
 }
