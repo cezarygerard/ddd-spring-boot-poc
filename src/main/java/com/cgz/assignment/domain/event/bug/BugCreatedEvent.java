@@ -1,4 +1,4 @@
-package com.cgz.assignment.domain.model.bug.events;
+package com.cgz.assignment.domain.event.bug;
 
 import java.io.Serializable;
 

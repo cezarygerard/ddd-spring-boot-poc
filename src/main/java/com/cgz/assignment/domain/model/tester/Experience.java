@@ -22,7 +22,7 @@ public class Experience {
     private Device device;
 
     @Column(nullable = false)
-    private Long experiencePoints = 0L;
+    private long experiencePoints = 0L;
 
     private Experience() {
     }
@@ -36,7 +36,7 @@ public class Experience {
         return device;
     }
 
-    Long getExperiencePoints() {
+    long getExperiencePoints() {
         return experiencePoints;
     }
 

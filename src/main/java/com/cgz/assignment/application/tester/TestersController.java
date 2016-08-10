@@ -1,7 +1,7 @@
-package com.cgz.assignment.application;
+package com.cgz.assignment.application.tester;
 
 import com.cgz.assignment.domain.dto.tester.TesterDto;
-import com.cgz.assignment.domain.services.TesterService;
+import com.cgz.assignment.domain.services.tester.TesterService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -25,7 +25,7 @@ public class TestersController {
     @RequestMapping(value = "/tester", method = RequestMethod.GET)
     public Iterable<TesterDto> findTesters(@RequestParam(name = "deviceId", defaultValue = "") List<Long> devices,
                                            @RequestParam(name = "country", defaultValue = "") List<String> countries,
-                                           @RequestParam int page, @RequestParam int size) {
+                                           @RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "20") int size) {
 
         Pageable pageable = new PageRequest(page, size);
         return testerService.findTesters(devices, countries, pageable);

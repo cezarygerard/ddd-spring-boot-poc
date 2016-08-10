@@ -1,20 +1,26 @@
-package com.cgz.assignment.domain.services;
+package com.cgz.assignment.domain.services.bug;
 
+import com.cgz.assignment.domain.exception.EntityNotFoundDomainException;
 import com.cgz.assignment.domain.model.bug.Bug;
 import com.cgz.assignment.domain.model.bug.BugFactory;
 import com.cgz.assignment.domain.model.bug.BugRepository;
-import com.cgz.assignment.domain.model.bug.events.BugEventPublisher;
 import com.cgz.assignment.domain.model.device.Device;
 import com.cgz.assignment.domain.model.device.DeviceRepository;
 import com.cgz.assignment.domain.model.tester.Tester;
 import com.cgz.assignment.domain.model.tester.TesterRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.Optional;
 
 /**
  * Created by czarek on 07.08.16.
  */
 @Service
+@Transactional(propagation = Propagation.REQUIRED, isolation = Isolation.READ_COMMITTED)
 public class BugService {
 
     private final BugEventPublisher bugEventPublisher;
@@ -32,11 +38,17 @@ public class BugService {
         this.bugEventPublisher = eventPublisher;
     }
 
-    public void submitBug(Long deviceId, Long testerId) {
-        //TODO VALIDATE INPUT
-        Tester tester = testerRepository.findOne(testerId);
-        Device device = deviceRepository.findOne(deviceId);
-        //TODO VALIDATE
+    public void submitBug(long deviceId, long testerId) {
+        Tester tester = Optional.ofNullable(testerRepository.findOne(testerId))
+                .orElseThrow(() ->
+                        new EntityNotFoundDomainException("BugService submitBug didn't find tester: " + testerId)
+                );
+
+        Device device = Optional.ofNullable(deviceRepository.findOne(deviceId))
+                .orElseThrow(() ->
+                        new EntityNotFoundDomainException("BugService submitBug didn't find device" + deviceId)
+                );
+
         Bug bug = bugFactory.create(device, tester);
         bugRepository.save(bug);
         bugEventPublisher.publishBugCreatedEvent(bug);

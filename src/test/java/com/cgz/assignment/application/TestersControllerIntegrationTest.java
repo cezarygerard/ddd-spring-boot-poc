@@ -38,9 +38,8 @@ public class TestersControllerIntegrationTest {
         List<Country> countries = Arrays.asList(Country.US, Country.JP);
 
         List<Long> inputAsList = Arrays.asList(devices);
-
-        List<Tester> res = testerRepository.findByDeviceAndCountryOrderByExperience(inputAsList, countries, new PageRequest(2, 2));
-
+        Tester one = testerRepository.findOne(5000L);
+        List<Tester> res = testerRepository.findByDeviceAndCountryOrderByExperience(inputAsList, countries, new PageRequest(0, 1));
         System.out.println(Arrays.toString(res.toArray()));
 
     }

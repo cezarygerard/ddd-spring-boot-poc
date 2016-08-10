@@ -1,5 +1,6 @@
-package com.cgz.assignment.domain.model.bug.events;
+package com.cgz.assignment.domain.services.bug;
 
+import com.cgz.assignment.domain.event.bug.BugCreatedEvent;
 import com.cgz.assignment.domain.model.bug.Bug;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;

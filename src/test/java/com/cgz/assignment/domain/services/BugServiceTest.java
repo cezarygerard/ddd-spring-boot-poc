@@ -3,11 +3,12 @@ package com.cgz.assignment.domain.services;
 import com.cgz.assignment.domain.model.bug.Bug;
 import com.cgz.assignment.domain.model.bug.BugFactory;
 import com.cgz.assignment.domain.model.bug.BugRepository;
-import com.cgz.assignment.domain.model.bug.events.BugEventPublisher;
 import com.cgz.assignment.domain.model.device.Device;
 import com.cgz.assignment.domain.model.device.DeviceRepository;
 import com.cgz.assignment.domain.model.tester.Tester;
 import com.cgz.assignment.domain.model.tester.TesterRepository;
+import com.cgz.assignment.domain.services.bug.BugEventPublisher;
+import com.cgz.assignment.domain.services.bug.BugService;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -57,6 +58,8 @@ public class BugServiceTest {
         bugService.submitBug(DEVICE_ID, TESTER_ID);
         verify(bugEventPublisher, times(1)).publishBugCreatedEvent(bug);
     }
+
+    //todo test exceptions
 
 
 }

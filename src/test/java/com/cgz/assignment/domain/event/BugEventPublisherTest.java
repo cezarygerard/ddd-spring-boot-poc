@@ -1,8 +1,10 @@
-package com.cgz.assignment.domain.model.bug.events;
+package com.cgz.assignment.domain.event;
 
+import com.cgz.assignment.domain.event.bug.BugCreatedEvent;
 import com.cgz.assignment.domain.model.bug.Bug;
 import com.cgz.assignment.domain.model.device.Device;
 import com.cgz.assignment.domain.model.tester.Tester;
+import com.cgz.assignment.domain.services.bug.BugEventPublisher;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.ArgumentCaptor;

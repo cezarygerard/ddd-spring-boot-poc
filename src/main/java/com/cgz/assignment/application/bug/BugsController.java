@@ -1,6 +1,6 @@
-package com.cgz.assignment.application;
+package com.cgz.assignment.application.bug;
 
-import com.cgz.assignment.domain.services.BugService;
+import com.cgz.assignment.domain.services.bug.BugService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -22,6 +22,7 @@ public class BugsController {
 
     @RequestMapping(value = "/bug", method = RequestMethod.POST)
     public void submitBug(@RequestParam long deviceId, @RequestParam long testerId) {
+        //TODO return BugDto
         bugService.submitBug(deviceId, testerId);
     }
 }
