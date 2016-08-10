@@ -5,11 +5,14 @@ package com.cgz.assignment.domain.dto.bug;
  */
 public class BugDto {
 
+    private long id;
+
     private long deviceId;
 
     private long testerId;
 
-    public BugDto(long device, long tester) {
+    public BugDto(long id, long device, long tester) {
+        this.id = id;
         this.deviceId = device;
         this.testerId = tester;
     }
@@ -28,5 +31,13 @@ public class BugDto {
 
     public void setTesterId(long testerId) {
         this.testerId = testerId;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 }

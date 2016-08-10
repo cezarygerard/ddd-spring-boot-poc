@@ -30,6 +30,10 @@ public class Bug {
     private Bug() {
     }
 
+    public Long getId() {
+        return id;
+    }
+
     public Device getDevice() {
         return device;
     }

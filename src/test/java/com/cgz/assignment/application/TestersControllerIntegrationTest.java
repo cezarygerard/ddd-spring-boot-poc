@@ -1,49 +1,60 @@
 package com.cgz.assignment.application;
 
-import com.cgz.assignment.domain.model.Country;
-import com.cgz.assignment.domain.model.bug.BugRepository;
-import com.cgz.assignment.domain.model.device.DeviceRepository;
-import com.cgz.assignment.domain.model.tester.Tester;
-import com.cgz.assignment.domain.model.tester.TesterRepository;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import org.springframework.web.context.WebApplicationContext;
 
-import java.util.Arrays;
-import java.util.List;
+import static org.hamcrest.Matchers.containsInAnyOrder;
+import static org.hamcrest.Matchers.equalTo;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 /**
  * Created by czarek on 07.08.16.
  */
+
+//TODO INTEGRATION TESTS:
+//paging [2]
+//empty values [4-5]
+//invalid params [3]
+
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class TestersControllerIntegrationTest {
 
     @Autowired
-    private BugRepository bugRepository;
+    private WebApplicationContext context;
 
-    @Autowired
-    private TesterRepository testerRepository;
+    private MockMvc mockMvc;
 
-    @Autowired
-    private DeviceRepository deviceRepository;
-
-    @Test
-    public void testSimpleFind() {
-        Long[] devices = {1L, 2L, 3L, 6L};
-
-        List<Country> countries = Arrays.asList(Country.US, Country.JP);
-
-        List<Long> inputAsList = Arrays.asList(devices);
-        Tester one = testerRepository.findOne(5000L);
-        List<Tester> res = testerRepository.findByDeviceAndCountryOrderByExperience(inputAsList, countries, new PageRequest(0, 1));
-        System.out.println(Arrays.toString(res.toArray()));
-
+    @Before
+    public void setup() {
+        mockMvc = MockMvcBuilders
+                .webAppContextSetup(context)
+                .alwaysExpect(status().isOk())
+                .alwaysExpect(header().string("Content-Type", "application/json;charset=UTF-8"))
+                .build();
     }
 
-//    TODO INTEGRATION TESTS
+    @Test
+    public void testHappyPath() throws Exception {
+        mockMvc.perform(get("/tester")
+                .param("deviceId", "1", "2", "3", "6")
+                .param("country", "US", "JP")
+                .param("page", "1")
+                .param("size", "3"))
+                .andExpect(jsonPath("$[0].testerId", equalTo(5)))
+                .andExpect(jsonPath("$[0].firstName", equalTo("Mingquan")))
+                .andExpect(jsonPath("$[0].lastName", equalTo("Zheng")))
+                .andExpect(jsonPath("$[0].country", equalTo("JP")))
+                .andExpect(jsonPath("$[0].devices[*].deviceId", containsInAnyOrder(1, 10, 5, 6, 7)))
+        ;
+    }
 
 }

@@ -52,7 +52,7 @@ public class BugService {
         Bug bug = bugFactory.createBug(device, tester);
         bugRepository.save(bug);
         bugEventPublisher.publishBugCreatedEvent(bug);
-        return new BugDto(bug.getDevice().getId(), bug.getTester().getId());
+        return new BugDto(bug.getId(), bug.getDevice().getId(), bug.getTester().getId());
     }
 
 }
