@@ -7,11 +7,13 @@ buildscript {
 	}
 	dependencies {
 		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+        classpath('info.solidsoft.gradle.pitest:gradle-pitest-plugin:1.1.10')
 	}
 }
 
 apply plugin: 'java'
 apply plugin: 'spring-boot'
+apply plugin: 'info.solidsoft.pitest'
 
 jar {
 	baseName = 'assignment'
@@ -33,7 +35,15 @@ dependencies {
 	compile('org.springframework.boot:spring-boot-starter-web')
 	runtime('org.postgresql:postgresql')
 	testCompile('org.springframework.boot:spring-boot-starter-test')
+
 }
 
-
+pitest {
+    targetClasses = ["com.cgz.*"]
+    threads = 5
+    outputFormats = ['XML', 'HTML']
+    mutators = ['MATH', 'CONDITIONALS_BOUNDARY', 'NEGATE_CONDITIONALS', 'REMOVE_CONDITIONALS', 'INCREMENTS', 'INVERT_NEGS', 'RETURN_VALS', 'INLINE_CONSTS', 'VOID_METHOD_CALLS', 'NON_VOID_METHOD_CALLS', 'CONSTRUCTOR_CALLS', 'EXPERIMENTAL_MEMBER_VARIABLE']
+    timeoutFactor = 10.0
+    //timeoutConstant = 10000
+}
 

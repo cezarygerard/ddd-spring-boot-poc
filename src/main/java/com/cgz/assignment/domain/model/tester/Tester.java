@@ -38,6 +38,7 @@ public class Tester {
     private int version;
 
 
+    //TODO change into Map<Device, Experience> after separating domain from persistance
     @OneToMany(fetch = FetchType.EAGER)
     @JoinColumn(name = "tester_id")
     private Set<Experience> experiences = new HashSet<>();

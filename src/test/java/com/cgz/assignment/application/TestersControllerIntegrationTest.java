@@ -19,11 +19,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
  * Created by czarek on 07.08.16.
  */
 
-//TODO INTEGRATION TESTS:
-//paging [2]
-//empty values [4-5]
-//invalid params [3]
-
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class TestersControllerIntegrationTest {
