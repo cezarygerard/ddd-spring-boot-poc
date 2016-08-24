@@ -1023,7 +1023,7 @@ INSERT into public.bug (id, device_id, tester_id) values (nextval('public.bug_id
 INSERT into public.bug (id, device_id, tester_id) values (nextval('public.bug_id_seq'),'6','7');
 INSERT into public.bug (id, device_id, tester_id) values (nextval('public.bug_id_seq'),'9','8');
 
-
+----------
 
 INSERT INTO public.experience (tester_id, device_id, experience_points, version) select tester_id, device_id, count(device_id), 0 from bug GROUP BY device_id, tester_id ;
 

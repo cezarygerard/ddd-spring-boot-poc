@@ -36,5 +36,6 @@ public class TesterTest {
         assertThat(oldExp).isEqualTo(0);
         tester.increaseExperienceInDevice(device);
     }
+    //TODO permutation tests (PItests)
 
 }
